@@ -15,14 +15,16 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
   StreamSubscription<Position> _positionSubscription;
 
   void iniciarSeguimiento() {
-    this._positionSubscription = geoLocator.Geolocator.getPositionStream(desiredAccuracy: geoLocator.LocationAccuracy.high,distanceFilter: 10)
+    this._positionSubscription = geoLocator.Geolocator.getPositionStream(
+            desiredAccuracy: geoLocator.LocationAccuracy.high,
+            distanceFilter: 10)
         .listen((Position position) {
-          final newLocation = new LatLng(position.latitude, position.longitude);
+      final newLocation = new LatLng(position.latitude, position.longitude);
       add(OnUbicacionCambio(newLocation));
     });
   }
 
-  void cancelarSegumiento(){
+  void cancelarSegumiento() {
     this._positionSubscription?.cancel();
   }
 
@@ -30,11 +32,10 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
   Stream<MiUbicacionState> mapEventToState(
     MiUbicacionEvent event,
   ) async* {
-    if(event is OnUbicacionCambio){
-      print(event);
+    if (event is OnUbicacionCambio) {
       yield state.copyWith(
         existeUbicacion: true,
-        ubicacion: event.ubicacion
+        ubicacion: event.ubicacion,
       );
     }
   }
