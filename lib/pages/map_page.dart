@@ -34,11 +34,11 @@ class _MapPageState extends State<MapPage> {
           BlocBuilder<MiUbicacionBloc, MiUbicacionState>(
             builder: (_, state) => crearMapa(state),
           ),
-          // Positioned(
-          //   left: 0,
-          //   right: 0,
-          //   child: SearchBar(),
-          // ),
+          Positioned(
+            left: 0,
+            right: 0,
+            child: SearchBar(),
+          ),
           MarcadorManual(),
         ],
       ),
